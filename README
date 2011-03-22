@@ -1,0 +1,84 @@
+"Saving Sue" is a Frogger-like game where you need to help distracted Sue
+cross the street.
+
+Created by garu for the SDL Game Contest (and for Sue's birthday :D)
+
+Art:
+====
+
+susan.png - created it myself, based on southpark-like characters
+released under cc-by-sa
+
+candy.png - created it myself, based on "Nimm2-type candy"
+by maweki (http://www.openclipart.org/user-detail/maweki)
+released under cc-by-sa
+
+the main screen was also created by myself and released under cc-by-sa.
+It was based on:
+
+   susan.png above
+
+   "aqua blue vintage car" public domain (CC0) by laurianne
+   http://www.openclipart.org/user-detail/laurianne
+
+   "police car" public domain (CC0) by JNESS
+   http://www.openclipart.org/user-detail/JNESS
+
+   "road distances sign" and "no entry sign with a man"
+   public domain (CC0) by ryanlerch
+   http://www.openclipart.org/user-detail/ryanlerch
+
+   "stop sign" public domain (CC0) by Leomarc
+   http://www.openclipart.org/user-detail/Leomarc
+
+   "caution frog sign" public domain (CC0) by wipp
+    http://www.openclipart.org/user-detail/wipp
+
+
+cars in the game were based on:
+
+   "little blue car" public domain (CC0) by spadassin
+   http://www.openclipart.org/user-detail/spadassin
+
+   "hot rod 2" public domain (CC0) by gustavorezende
+   http://www.openclipart.org/user-detail/gustavorezende
+
+   "red and green renault twingo" public domain (CC0) by molumen
+   http://www.openclipart.org/user-detail/molumen
+
+   "beetle (car)" public domain (CC0) by Chrisdesign
+   http://www.openclipart.org/user-detail/Chrisdesign
+
+
+Sound:
+======
+
+   "sun life moon friend" (bgmusic.ogg) by Dhalius Music
+   http://www.jamendo.com/en/album/35880
+   Release under a Creative Commons Attribution-NonCommercial-ShareAlike
+   3.0 Unported License (BY-NC-SA)
+
+   "car_horn1.wav" created by KRAFTWERK2K1
+   http://www.freesound.org/usersViewSingle.php?id=276701
+   http://www.freesound.org/samplesViewSingle.php?id=32417
+   Released under a Creative Commons Sampling Plus 1.0 License
+
+   "car_horn2.wav" created by THE_bizniss
+   http://www.freesound.org/usersViewSingle.php?id=382028
+   http://www.freesound.org/samplesViewSingle.php?id=58202
+   Released under a Creative Commons Sampling Plus 1.0 License
+
+
+   "candy.wav", "sweet.wav", "uhu.wav", "yay".wav",
+   "hurt.wav", "man.wav", "yikes.wav", "ouch.wav",
+   created by Susan Katz,
+   Released under a Creative Commons Attribution-NonCommercial-NoDerivs
+   3.0 Unported License (BY-NC-ND).
+
+
+
+Licenses:
+=========
+
+CC0 http://creativecommons.org/publicdomain/zero/1.0/
+BY-NC-ND http://creativecommons.org/licenses/by-nc-nd/3.0/
