@@ -1,9 +1,7 @@
 package Games::SavingSue::Menu;
-use strict;
-use warnings;
-use SDL;
-use SDL::Events;
+use Avenger;
 use SDLx::Audio;
+use SDLx::Surface;
 use Sub::Frequency;
 use SDLx::Widget::Menu;
 
@@ -22,27 +20,25 @@ sub startup {
         topleft => [440,340],
         font_size => 40,
     )->items(
-        'New Game' => sub { play($app) },
-        'Quit'     => sub { quit($app) },
+        'New Game' => \&play,
+        'Quit'     => \&quit,
     );
 
-    $app->add_event_handler( sub {
-        my $event = shift;
+    event 'key_down' => sub {
+        my ($key, $event) = @_;
         $menu->event_hook( $event );
-    });
+    };
 
-    $app->add_show_handler( sub {
+    show {
         my ($delta, $app) = @_;
 
         $logo->blit($app);
         $menu->render( $app );
 
         $app->update;
-    });
+    };
 
-    $app->add_show_handler( sub {
-        my ($delta, $app) = @_;
-
+    show {
         with_probability 0.1 => sub {
             $sound->play('horn1');
         };
@@ -50,20 +46,16 @@ sub startup {
         with_probability 0.005 => sub {
             $sound->play('horn2');
         };
-    });
+    };
 
 }
 
 sub play {
-    my $app = shift;
-    $app->stash->{next_state} = 'Level';
-    $app->stop;
+    load 'Level';
 }
 
 sub quit {
-    my $app = shift;
-    $app->stash->{next_state} = undef;
-    $app->stop;
+    exit;
 }
 
 

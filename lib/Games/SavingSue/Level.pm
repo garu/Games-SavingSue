@@ -1,9 +1,5 @@
 package Games::SavingSue::Level;
-use strict;
-use warnings;
-use SDL;
-use SDL::Events;
-use SDL::Event;
+use Avenger;
 use SDLx::Audio;
 use SDL::Rect;
 use SDLx::Surface;
@@ -12,7 +8,7 @@ use SDLx::Text;
 use Sub::Frequency;
 
 sub startup {
-    my ($self, $app) = @_;
+    my $app = app;
 
     my $road = SDLx::Surface->load('data/road.png');
 
@@ -64,7 +60,7 @@ sub startup {
     );
 
     my $is_dead = 0;
-    $app->add_show_handler( sub {
+    show {
         $road->blit($app);
         $candy->draw($app);
         $score->{text}->write_to( $app, 'Score: ' . $score->{value} );
@@ -90,44 +86,40 @@ sub startup {
             $app->stash->{score} = $score->{value};
             $app->stash->{lives} = $lives->{value} - 1;
             if ($app->stash->{lives} > 0) {
-                $app->stash->{next_state} = 'Level';
+                load 'Level';
             }
             else {
-                $app->stash->{next_state} = 'Menu';
+                load 'Menu';
             }
-            $app->stop;
         }
         else {
             $sue->draw($app);
             $app->update;
         }
-    });
+    };
 
-    $app->add_event_handler( sub {
-        my ($event, $app) = @_;
-        if ($event->type == SDL_KEYDOWN) {
-            my $key = $event->key_sym;
-            if ($key == SDLK_RIGHT) {
-                my $new_x = $sue->x + $sue->clip->w;
-                $sue->x( $new_x ) if $new_x + $sue->clip->w <= $app->w;
-            }
-            elsif ($key == SDLK_DOWN) {
-                my $new_y = $sue->y + $sue->clip->h;
-                $sue->y( $new_y ) if $new_y + $sue->clip->h <= $app->h;
-            }
-            elsif ($key == SDLK_LEFT) {
-                my $new_x = $sue->x - $sue->clip->w;
-                $sue->x( $new_x ) if $new_x >= 0;
-            }
-            elsif ($key == SDLK_UP) {
-                my $new_y = $sue->y - $sue->clip->h;
-                $sue->y( $new_y ) if $new_y >= 0;
-            }
+    event 'key_down' => sub {
+        my ($key, $event) = @_;
+        if ($key eq 'right') {
+            my $new_x = $sue->x + $sue->clip->w;
+            $sue->x( $new_x ) if $new_x + $sue->clip->w <= $app->w;
         }
-    });
+        elsif ($key eq 'down') {
+            my $new_y = $sue->y + $sue->clip->h;
+            $sue->y( $new_y ) if $new_y + $sue->clip->h <= $app->h;
+        }
+        elsif ($key eq 'left') {
+            my $new_x = $sue->x - $sue->clip->w;
+            $sue->x( $new_x ) if $new_x >= 0;
+        }
+        elsif ($key eq 'up') {
+            my $new_y = $sue->y - $sue->clip->h;
+            $sue->y( $new_y ) if $new_y >= 0;
+        }
+    };
 
-    $app->add_move_handler( sub {
-        my ($delta, $app) = @_;
+    move {
+        my ($delta) = @_;
 
         if ($sue->rect->colliderect($candy->rect)) {
             $winning_sounds->play( 1 + int( rand 4 ) );
@@ -139,10 +131,10 @@ sub startup {
                 $lives->{value}++;
             }
         }
-    });
+    };
 
-    $app->add_move_handler( sub {
-        my ($delta, $app) = @_;
+    move {
+        my ($delta) = @_;
 
         if (defined $sue->rect->collidelist( [ map { $_->{sprite}->rect } @cars ] ) ) {
             $is_dead = 1;
@@ -150,10 +142,10 @@ sub startup {
             $app->remove_all_event_handlers;
             $app->remove_all_move_handlers;
         }
-    });
+    };
 
-    $app->add_move_handler( sub {
-        my ($delta, $app) = @_;
+    move {
+        my ($delta) = @_;
         my @new_cars = ();
 
         foreach my $i (0 .. $#cars) {
@@ -198,7 +190,7 @@ sub startup {
         }
 
         @cars = @new_cars;
-    });
+    };
 }
 
 sub spawn {
